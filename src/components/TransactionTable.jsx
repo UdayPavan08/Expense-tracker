@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import Badge from "./Badge";
+import { fmt } from "../utils/helpers";
 
 const PAGE_SIZE = 7;
 
@@ -106,7 +107,7 @@ function TransactionTable({ rows, columns, onDelete, colorMap, typeKey }) {
                     bg={(colorMap[r[typeKey]] || "#888") + "22"}
                   />
                 </td>
-                <td className="px-2 py-3 text-right font-bold text-purple-700">{r.amount}</td>
+                <td className="px-2 py-3 text-right font-bold text-purple-700">{fmt(r.amount)}</td>
                 <td className="px-2 py-3"><DeleteBtn onClick={() => onDelete(r.id)} /></td>
               </tr>
             ))}
