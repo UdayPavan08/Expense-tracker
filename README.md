@@ -3,10 +3,10 @@
 A personal finance management app built with React. Track your expenses, income, budgets, and monthly savings — all in one place.
 
 ## 🖥️ Live Demo
-[Add your deployed link here]
+[\[Add your deployed link here\]](https://expense-tracker-uday.vercel.app/)
 
 ## 📸 Screenshot
-[Add a screenshot here]
+(./Finance-Tracker.png)
 
 ## ✨ Features
 
