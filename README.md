@@ -1,16 +1,80 @@
-# React + Vite
+# 💸 Finance Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal finance management app built with React. Track your expenses, income, budgets, and monthly savings — all in one place.
 
-Currently, two official plugins are available:
+## 🖥️ Live Demo
+[Add your deployed link here]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📸 Screenshot
+[Add a screenshot here]
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Expense & Income Tracking** — Add, view, and delete transactions with category and date
+- **Budget Tracker** — Set monthly budgets per category with visual progress bars
+- **Charts** — Spending by category (donut chart) and monthly income vs expenses (bar chart)
+- **Monthly Stats** — Month-by-month breakdown with savings rate
+- **Search, Filter & Sort** — Find transactions instantly
+- **Pagination** — Clean table view with 7 entries per page
+- **CSV Export** — Download expenses and incomes as CSV
+- **LocalStorage** — Data persists across page refreshes
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React** — UI library
+- **Vite** — Build tool
+- **Tailwind CSS** — Styling
+- **Recharts** — Charts and data visualization
+- **Context API + useReducer** — Global state management
+- **localStorage** — Client-side data persistence
+
+## ⚛️ React Concepts Used
+
+- `useState` — Local component state
+- `useEffect` — Syncing state to localStorage
+- `useReducer` — Managing complex expense/income state with actions
+- `useContext` + Context API — Global state without prop drilling
+- `useMemo` — Memoizing filtered/sorted data for performance
+- `useCallback` — Memoizing form submit handlers
+
+## 📁 Project Structure
+
+
+src/
+├── components/
+│   ├── AddExpenseForm.jsx
+│   ├── AddIncomeForm.jsx
+│   ├── Badge.jsx
+│   ├── CategoryDonut.jsx
+│   ├── MonthlyBar.jsx
+│   ├── MonthlyStats.jsx
+│   ├── ProgressBar.jsx
+│   ├── Section.jsx
+│   ├── StatCard.jsx
+│   ├── Tabs.jsx
+│   └── TransactionTable.jsx
+├── constants/
+│   └── index.js
+├── context/
+│   └── FinanceContext.jsx
+├── utils/
+│   └── helpers.js
+└── App.jsx
+
+
+## 🚀 Getting Started
+
+```bash
+# Clone the repo
+git clone https://github.com/UdayPavan08/Expense-tracker.git
+
+# Navigate into the project
+cd Expense-tracker
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+```
+
