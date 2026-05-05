@@ -6,7 +6,7 @@ A personal finance management app built with React. Track your expenses, income,
 [\[Add your deployed link here\]](https://expense-tracker-uday.vercel.app/)
 
 ## 📸 Screenshot
-(./Finance-Tracker.png)
+![Screenshot](./Finance-Tracker.png)
 
 ## ✨ Features
 
