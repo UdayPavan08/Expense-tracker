@@ -7,6 +7,7 @@ const PAGE_SIZE = 7;
 function DeleteBtn({ onClick }) {
   return (
     <button
+      aria-label="Delete transaction"
       onClick={() => {
         if (window.confirm("Are you sure you want to delete this transaction?")) {
           onClick();

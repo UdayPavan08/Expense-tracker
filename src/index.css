@@ -1,3 +1,10 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :focus-visible {
+    outline: none !important;
+    @apply ring-2 ring-purple-500 ring-offset-2 dark:ring-offset-gray-900;
+  }
+}

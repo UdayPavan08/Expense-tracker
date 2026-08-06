@@ -68,6 +68,7 @@ function App() {
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDark}
+              aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
               title={dark ? "Switch to light mode" : "Switch to dark mode"}
               className="text-lg px-2.5 py-1.5 rounded-xl border-2 border-purple-200 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition"
             >
@@ -83,6 +84,7 @@ function App() {
             value={fmt(balance)}
             color={balance >= 0 ? "#7C3AED" : "#EF4444"}
             sub={balance >= 0 ? "You're doing great!" : "Overspending!"}
+            ariaLive="polite"
           />
           <StatCard label="Total Income"   value={fmt(totalIncome)}   color="#7C3AED" />
           <StatCard label="Total Expenses" value={fmt(totalExpenses)} color="#EC4899" />
