@@ -45,10 +45,14 @@ const FinanceContext = createContext(null);
 export function FinanceProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // Split effects so only the changed collection is written to localStorage
   useEffect(() => {
     localStorage.setItem("ft_expenses", JSON.stringify(state.expenses));
-    localStorage.setItem("ft_incomes",  JSON.stringify(state.incomes));
-  }, [state]);
+  }, [state.expenses]);
+
+  useEffect(() => {
+    localStorage.setItem("ft_incomes", JSON.stringify(state.incomes));
+  }, [state.incomes]);
 
   return (
     <FinanceContext.Provider value={{ state, dispatch }}>
@@ -60,5 +64,7 @@ export function FinanceProvider({ children }) {
 // ─── Custom Hook ──────────────────────────────────────────────────────────────
 
 export function useFinance() {
-  return useContext(FinanceContext);
+  const ctx = useContext(FinanceContext);
+  if (!ctx) throw new Error("useFinance must be used within <FinanceProvider>");
+  return ctx;
 }
