@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { MONTHS } from "../constants";
 import { fmt } from "../utils/helpers";
@@ -13,7 +13,7 @@ function MonthlyBar({ expenses, incomes }) {
   }, [expenses, incomes]);
 
   if (!data.length) {
-    return <p className="text-gray-400 text-sm text-center py-8">No data yet.</p>;
+    return <p className="text-gray-400 dark:text-gray-500 text-sm text-center py-8">No data yet.</p>;
   }
 
   return (
@@ -33,4 +33,4 @@ function MonthlyBar({ expenses, incomes }) {
   );
 }
 
-export default MonthlyBar;
+export default memo(MonthlyBar);

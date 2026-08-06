@@ -7,8 +7,12 @@ const PAGE_SIZE = 7;
 function DeleteBtn({ onClick }) {
   return (
     <button
-      onClick={onClick}
-      className="text-gray-300 hover:text-red-500 transition-colors font-bold text-sm px-1"
+      onClick={() => {
+        if (window.confirm("Are you sure you want to delete this transaction?")) {
+          onClick();
+        }
+      }}
+      className="text-gray-300 hover:text-red-500 dark:text-gray-600 dark:hover:text-red-400 transition-colors font-bold text-sm px-1"
     >
       ✕
     </button>
@@ -42,13 +46,13 @@ function TransactionTable({ rows, columns, onDelete, colorMap, typeKey }) {
       {/* Controls */}
       <div className="flex flex-wrap gap-2 mb-4 items-center">
         <input
-          className="text-sm px-3 py-1.5 rounded-xl border-2 border-purple-100 focus:outline-none focus:border-purple-400 w-40"
+          className="text-sm px-3 py-1.5 rounded-xl border-2 border-purple-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:border-purple-400 dark:focus:border-purple-500 w-40 transition-colors"
           placeholder="Search…"
           value={search}
           onChange={e => { setSearch(e.target.value); setPage(1); }}
         />
         <select
-          className="text-sm px-3 py-1.5 rounded-xl border-2 border-purple-100 focus:outline-none focus:border-purple-400"
+          className="text-sm px-3 py-1.5 rounded-xl border-2 border-purple-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:outline-none focus:border-purple-400 dark:focus:border-purple-500 transition-colors"
           value={sort}
           onChange={e => setSort(e.target.value)}
         >
@@ -65,7 +69,7 @@ function TransactionTable({ rows, columns, onDelete, colorMap, typeKey }) {
               className={`text-xs px-3 py-1 rounded-full border transition font-medium ${
                 filter === t
                   ? "bg-purple-600 border-purple-600 text-white"
-                  : "border-purple-200 text-gray-500 hover:border-purple-400"
+                  : "border-purple-200 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-purple-400 dark:hover:border-purple-500"
               }`}
             >
               {t}
@@ -80,7 +84,7 @@ function TransactionTable({ rows, columns, onDelete, colorMap, typeKey }) {
           <thead>
             <tr>
               {columns.map(c => (
-                <th key={c} className="text-left text-xs font-medium text-gray-400 uppercase tracking-wide pb-2 border-b border-purple-100 px-2">
+                <th key={c} className="text-left text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide pb-2 border-b border-purple-100 dark:border-gray-700 px-2">
                   {c}
                 </th>
               ))}
@@ -90,16 +94,19 @@ function TransactionTable({ rows, columns, onDelete, colorMap, typeKey }) {
           <tbody>
             {sliced.length === 0 && (
               <tr>
-                <td colSpan={columns.length + 1} className="text-center py-8 text-gray-400 text-sm">
-                  No entries found.
+                <td colSpan={columns.length + 1} className="text-center py-12 text-gray-400 dark:text-gray-500 text-sm">
+                  <div className="flex flex-col items-center gap-2">
+                    <span className="text-3xl">🔍</span>
+                    <span>No entries found.</span>
+                  </div>
                 </td>
               </tr>
             )}
             {sliced.map(r => (
-              <tr key={r.id} className="border-b border-purple-50 hover:bg-purple-50/40 transition">
-                <td className="px-2 py-3 text-gray-400 whitespace-nowrap">{r.date}</td>
-                <td className="px-2 py-3 font-medium text-gray-700">{r.name}</td>
-                <td className="px-2 py-3 text-gray-500">{r.month}</td>
+              <tr key={r.id} className="border-b border-purple-50 dark:border-gray-700 hover:bg-purple-50/40 dark:hover:bg-gray-700/40 transition">
+                <td className="px-2 py-3 text-gray-400 dark:text-gray-500 whitespace-nowrap">{r.date}</td>
+                <td className="px-2 py-3 font-medium text-gray-700 dark:text-gray-200">{r.name}</td>
+                <td className="px-2 py-3 text-gray-500 dark:text-gray-400">{r.month}</td>
                 <td className="px-2 py-3">
                   <Badge
                     label={r[typeKey]}
@@ -107,7 +114,7 @@ function TransactionTable({ rows, columns, onDelete, colorMap, typeKey }) {
                     bg={(colorMap[r[typeKey]] || "#888") + "22"}
                   />
                 </td>
-                <td className="px-2 py-3 text-right font-bold text-purple-700">{fmt(r.amount)}</td>
+                <td className="px-2 py-3 text-right font-bold text-purple-700 dark:text-purple-400">{fmt(r.amount)}</td>
                 <td className="px-2 py-3"><DeleteBtn onClick={() => onDelete(r.id)} /></td>
               </tr>
             ))}
@@ -125,7 +132,7 @@ function TransactionTable({ rows, columns, onDelete, colorMap, typeKey }) {
               className={`text-xs px-3 py-1 rounded-full border transition font-medium ${
                 page === i + 1
                   ? "bg-purple-600 border-purple-600 text-white"
-                  : "border-purple-200 text-gray-500 hover:border-purple-400"
+                  : "border-purple-200 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-purple-400"
               }`}
             >
               {i + 1}

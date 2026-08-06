@@ -5,7 +5,7 @@ import { today, getMonth } from "../utils/helpers";
 import Section from "./Section";
 
 const inputCls =
-  "w-full text-sm px-3 py-2 rounded-xl border-2 border-purple-100 focus:outline-none focus:border-purple-400 bg-white text-gray-700 transition";
+  "w-full text-sm px-3 py-2 rounded-xl border-2 border-purple-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:border-purple-400 dark:focus:border-purple-500 bg-white text-gray-700 transition";
 
 function AddIncomeForm() {
   const { dispatch } = useFinance();
@@ -18,11 +18,16 @@ function AddIncomeForm() {
     if (!form.name.trim())                 return setErr("Name is required");
     if (!form.amount || +form.amount <= 0) return setErr("Enter a valid amount");
     if (!form.date)                        return setErr("Date is required");
+
+    const selectedDate = new Date(form.date);
+    const currentDate  = new Date(today());
+    if (selectedDate > currentDate)        return setErr("Date cannot be in the future");
+
     setErr("");
     dispatch({
       type: "ADD_INCOME",
       payload: {
-        id: Date.now(),
+        id: crypto.randomUUID(),
         name: form.name.trim(),
         amount: +form.amount,
         date: form.date,
@@ -46,6 +51,7 @@ function AddIncomeForm() {
           className={inputCls}
           placeholder="Amount (₹)"
           type="number"
+          min="0"
           value={form.amount}
           onChange={e => set("amount", e.target.value)}
         />
@@ -60,6 +66,7 @@ function AddIncomeForm() {
           className={inputCls}
           type="date"
           value={form.date}
+          max={today()}
           onChange={e => set("date", e.target.value)}
         />
       </div>
@@ -70,7 +77,7 @@ function AddIncomeForm() {
         >
           + Add Income
         </button>
-        {err && <span className="text-xs text-red-500">{err}</span>}
+        {err && <span className="text-xs text-red-500 dark:text-red-400">{err}</span>}
       </div>
     </Section>
   );

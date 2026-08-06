@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useMemo } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { CATEGORY_COLORS } from "../constants";
@@ -13,7 +14,7 @@ function CategoryDonut({ expenses }) {
   }, [expenses]);
 
   if (!data.length) {
-    return <p className="text-gray-400 text-sm text-center py-8">No data yet.</p>;
+    return <p className="text-gray-400 dark:text-gray-500 text-sm text-center py-8">No expense data yet.</p>;
   }
 
   return (
@@ -40,4 +41,4 @@ function CategoryDonut({ expenses }) {
   );
 }
 
-export default CategoryDonut;
+export default memo(CategoryDonut);
